@@ -22,6 +22,7 @@ namespace tic_tac_toe
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.BackgroundImage = Image.FromFile(@"C:\Users\User\Desktop\f9pTJx.jpg");
             this.Width = 500;
             this.Height = 500;
 
@@ -61,7 +62,77 @@ namespace tic_tac_toe
             }
 
             sender.GetType().GetProperty("Enabled").SetValue(sender, false);
+            ChekWin();
+        }
 
+        private void ChekWin()
+        {
+            if (button[0, 0].Text == button[0, 1].Text && button[0, 1].Text == button[0, 2].Text)
+            {
+                if (button[0, 0].Text != "")
+                    MessageBox.Show("Вы победили!");
+            }
+
+            if (button[1, 0].Text == button[1, 1].Text && button[1, 1].Text == button[1, 2].Text)
+            {
+                if (button[1, 0].Text != "")
+                    MessageBox.Show("Вы победили!");
+            }
+
+            if (button[2, 0].Text == button[2, 1].Text && button[2, 1].Text == button[2, 2].Text)
+            {
+                if (button[2, 0].Text != "")
+                    MessageBox.Show("Вы победили!");
+            }
+
+            if (button[0, 1].Text == button[1, 1].Text && button[1, 1].Text == button[2, 1].Text)
+            {
+                if (button[0, 1].Text != "")
+                    MessageBox.Show("Вы победили!");
+            }
+
+            if (button[0, 2].Text == button[1, 2].Text && button[1, 2].Text == button[2, 2].Text)
+            {
+                if (button[0, 2].Text != "")
+                    MessageBox.Show("Вы победили!");
+            }
+
+            if (button[0, 0].Text == button[1, 0].Text && button[1, 0].Text == button[2, 0].Text)
+            {
+                if (button[0, 0].Text != "")
+                    MessageBox.Show("Вы победили!");
+            }
+
+            if (button[0, 0].Text == button[1, 1].Text && button[1, 1].Text == button[2, 2].Text)
+            {
+                if (button[0, 0].Text != "")
+                    MessageBox.Show("Вы победили!");
+            }
+
+            if (button[2, 0].Text == button[1, 1].Text && button[1, 1].Text == button[0, 2].Text)
+            {
+                if (button[2, 0].Text != "")
+                    MessageBox.Show("Вы победили!");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            for(int i =0; i<3; i++)
+            {
+                for(int j =0; j<3; j++)
+                {
+                    button[i, j].Text = "";
+                    button[i, j].Enabled = true;
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            StartGame str = new StartGame();
+            str.Show();
+            this.Hide();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace tic_tac_toe
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new StartGame());
             Application.Run(new Form1());
         }
     }
