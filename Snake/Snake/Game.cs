@@ -43,7 +43,7 @@ namespace Snake
             CreateMap();
             GenerateFruit();
             timer.Tick += new EventHandler(_update);
-            timer.Interval = 300;
+            timer.Interval = 200;
             timer.Start();
             this.KeyDown += new KeyEventHandler(OKP);
         }
@@ -62,6 +62,49 @@ namespace Snake
             this.Controls.Add(fruit);
         }
 
+        private void _chekBoards()
+        {
+            if(snake[0].Location.X < 0)
+            {
+                for(int j = 1; j<= score; j++)
+                {
+                    this.Controls.Remove(snake[j]);
+                }
+                score = 0;
+                label.Text = "Score: " + score;
+                dirX = 1;
+            }
+            if (snake[0].Location.X > _height-60)
+            {
+                for (int j = 1; j <= score; j++)
+                {
+                    this.Controls.Remove(snake[j]);
+                }
+                score = 0;
+                label.Text = "Score: " + score;
+                dirX = -1;
+            }
+            if (snake[0].Location.Y < 0)
+            {
+                for (int j = 1; j <= score; j++)
+                {
+                    this.Controls.Remove(snake[j]);
+                }
+                score = 0;
+                label.Text = "Score: " + score;
+                dirY = 1;
+            }
+            if (snake[0].Location.Y > _height-60)
+            {
+                for (int j = 1; j <= score; j++)
+                {
+                    this.Controls.Remove(snake[j]);
+                }
+                score = 0;
+                label.Text = "Score: " + score;
+                dirY =  -1;
+            }
+        }
         private void _eatItSelf()
         {
             for(int i =1; i< score; i++)
@@ -103,6 +146,7 @@ namespace Snake
         }
         private void _update(object sender, EventArgs eventArgs)
         {
+            _chekBoards();
             _eatFruit();
             MoveSnake();
         }
