@@ -12,6 +12,7 @@ namespace Snake
 {
     public partial class Form1 : Form
     {
+        Game game = new Game();
         public Form1()
         {
             InitializeComponent();
@@ -25,5 +26,17 @@ namespace Snake
         {
             
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            game.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
     }
 }

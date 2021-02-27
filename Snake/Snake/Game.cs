@@ -48,7 +48,6 @@ namespace Snake
             this.KeyDown += new KeyEventHandler(OKP);
         }
 
-
         private void GenerateFruit()
         {
             Random r = new Random();
@@ -150,6 +149,7 @@ namespace Snake
             _eatFruit();
             MoveSnake();
         }
+
         private void CreateMap()
         {
             for(int i =0;i <= _width/_size; i++)
