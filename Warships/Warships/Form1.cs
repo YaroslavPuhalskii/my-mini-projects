@@ -82,6 +82,10 @@ namespace Warships
                             button.Text = i.ToString();
                         }
                     }
+                    else
+                    {
+                        button.Click += new EventHandler(PlayerShoot);
+                    }
                     this.Controls.Add(button);
                 }
             }
@@ -122,6 +126,37 @@ namespace Warships
                     myMap[pressedButton.Location.Y / cellSize, pressedButton.Location.X / cellSize] = 0;
                 }
             }
+        }
+
+        private void PlayerShoot(object sender, EventArgs e)
+        {
+            Button pressedButton = sender as Button;
+            Shoot(enemyMap, pressedButton);
+        }
+
+        private bool Shoot(int[,] map, Button pressedButton)
+        {
+            bool hit = false;
+            if(isPlaying)
+            {
+                int delta = 0;
+                if(pressedButton.Location.X >350)
+                { delta = 350; }
+                if (map[pressedButton.Location.Y / cellSize, (pressedButton.Location.X - delta)/ cellSize] != 0)
+                {
+                    hit = true;
+
+                    pressedButton.BackColor = Color.Blue;
+                    pressedButton.Text = "X";
+                }
+                else
+                {
+                    hit = false;
+                    pressedButton.BackColor = Color.Black;
+                }
+            }
+           
+            return hit;
         }
 
     }
