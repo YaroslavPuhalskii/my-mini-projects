@@ -12,14 +12,20 @@ namespace Warships
 {
     public partial class Form1 : Form
     {
-        private const int mapSize = 11;
+        public const int mapSize = 10;
         public int cellSize = 30;
         public String str = "АБВГДЕЁЖЗИ";
+
         bool isPlaying = false;
 
         public int[,] myMap = new int[mapSize, mapSize];
         public int[,] enemyMap = new int[mapSize, mapSize];
 
+        public Button[,] myButtons = new Button[mapSize, mapSize];
+        public Button[,] enemyButtons = new Button[mapSize, mapSize];
+
+        public Bot bot;
+ 
         public Form1()
         {
             InitializeComponent();
@@ -29,9 +35,11 @@ namespace Warships
             Init();
         }
         public void Init()
-        {
-            
+        {            
             MapCreate();
+            bot = new Bot(enemyMap, myMap, enemyButtons, myButtons);
+            enemyMap = bot.ConfigureShips();
+
         }
 
         private void MapCreate()
@@ -57,7 +65,8 @@ namespace Warships
                             button.Text = i.ToString();
                         }
                     }
-                    else { button.Click += new EventHandler(ConfigureShips); } 
+                    else { button.Click += new EventHandler(ConfigureShips); }
+                    myButtons[i, j] = button;
                     this.Controls.Add(button);
                 }
             }
@@ -86,6 +95,7 @@ namespace Warships
                     {
                         button.Click += new EventHandler(PlayerShoot);
                     }
+                    myButtons[i, j] = button;
                     this.Controls.Add(button);
                 }
             }
@@ -131,7 +141,34 @@ namespace Warships
         private void PlayerShoot(object sender, EventArgs e)
         {
             Button pressedButton = sender as Button;
-            Shoot(enemyMap, pressedButton);
+            bool playerTurn = Shoot(enemyMap, pressedButton);
+            if (!playerTurn)
+            { bot.Shoot(); }
+
+            if (!CheckIfMapIsNotEmpty())
+            {
+                this.Controls.Clear();
+                Init();
+            }
+        }
+
+        public bool CheckIfMapIsNotEmpty()
+        {
+            bool isEmpty1 = true;
+            bool isEmpty2 = true;
+            for (int i = 1; i < mapSize; i++)
+            {
+                for (int j = 1; j < mapSize; j++)
+                {
+                    if (myMap[i, j] != 0)
+                        isEmpty1 = false;
+                    if (enemyMap[i, j] != 0)
+                        isEmpty2 = false;
+                }
+            }
+            if (isEmpty1 || isEmpty2)
+                return false;
+            else return true;
         }
 
         private bool Shoot(int[,] map, Button pressedButton)
@@ -158,6 +195,5 @@ namespace Warships
            
             return hit;
         }
-
     }
 }
