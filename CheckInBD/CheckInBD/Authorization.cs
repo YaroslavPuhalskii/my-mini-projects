@@ -15,6 +15,41 @@ namespace CheckInBD
         public Authorization()
         {
             InitializeComponent();
+
+            this.loginButton.AutoSize = false;
+            this.loginButton.Size = new Size(this.loginButton.Size.Width, 64);
+            this.passwordButton.AutoSize = false;
+            this.passwordButton.Size = new Size(this.passwordButton.Size.Width, 64);
+        }
+
+        private void X_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void X_MouseEnter(object sender, EventArgs e)
+        {
+            X.ForeColor = Color.Red;
+        }
+
+        private void X_MouseLeave(object sender, EventArgs e)
+        {
+            X.ForeColor = Color.White;
+        }
+
+        Point lastPoint;
+        private void label1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - lastPoint.X;
+                this.Top += e.Y - lastPoint.Y;
+            }
+        }
+
+        private void label1_MouseDown(object sender, MouseEventArgs e)
+        {
+            lastPoint = new Point(e.X, e.Y);
         }
     }
 }
