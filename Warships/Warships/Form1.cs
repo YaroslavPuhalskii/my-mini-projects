@@ -74,6 +74,7 @@ namespace Warships
             {
                 for (int j = 0; j < mapSize; j++)
                 {
+                    myMap[i, j] = 0;
                     enemyMap[i, j] = 0;
                     Button button = new Button();
                     button.Location = new Point(j * cellSize +350, i * cellSize);
