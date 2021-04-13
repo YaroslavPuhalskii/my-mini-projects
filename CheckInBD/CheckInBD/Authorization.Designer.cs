@@ -68,12 +68,13 @@ namespace CheckInBD
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(230)))), ((int)(((byte)(223)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(157, 296);
+            this.button1.Location = new System.Drawing.Point(138, 297);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(152, 36);
             this.button1.TabIndex = 7;
             this.button1.Text = "Войти";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // passwordButton
             // 
