@@ -79,9 +79,6 @@ namespace CheckInBD
             {
                 MessageBox.Show("NO");
             }
-
-
-
         }
     }
 }
