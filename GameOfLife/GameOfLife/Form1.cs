@@ -72,7 +72,24 @@ namespace GameOfLife
 
         private int CountNeighbours(int x, int y)
         {
-            return 0;
+            int count = 0;
+
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    var col = (x + i + cols) % cols;
+                    var row = (y + j + rows) % rows;
+
+                    var isSelfCheck = col == x && row == y;
+                    var hasLife = field[col, row];
+
+                    if (hasLife && !isSelfCheck)
+                        count++;
+                }
+            }
+
+            return count;
         }
 
         private void NextGeneretion()
@@ -89,7 +106,7 @@ namespace GameOfLife
 
                     if (!haslife && neighboursCount == 3)
                         newfield[x, y] = true;
-                    else if (haslife && neighboursCount != 3)
+                    else if (haslife && (neighboursCount < 2 || neighboursCount > 3))
                         newfield[x, y] = false;
                     else
                         newfield[x, y] = field[x, y];
@@ -106,6 +123,37 @@ namespace GameOfLife
         private void timer1_Tick(object sender, EventArgs e)
         {
             NextGeneretion();
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!timer1.Enabled)
+                return;
+
+            if (e.Button == MouseButtons.Left)
+            {
+                var x = e.Location.X / resolution;
+                var y = e.Location.Y / resolution;
+                var validate = ValidateMouse(x, y);
+                
+                if (validate)
+                    field[x, y] = true;
+            }
+
+            if (e.Button == MouseButtons.Right)
+            {
+                var x = e.Location.X / resolution;
+                var y = e.Location.Y / resolution;
+                var validate = ValidateMouse(x, y);
+
+                if (validate)
+                    field[x, y] = false;
+            }
+        }
+
+        private bool ValidateMouse(int x, int y)
+        {
+            return x >= 0 && y >= 0 && x < cols && y < rows;
         }
     }
 }
