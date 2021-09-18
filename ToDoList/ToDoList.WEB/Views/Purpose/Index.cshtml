@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Purpose";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Информация о целях</h2>
+
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status" id="loader">
+            <span class="visually-hidden">Загрузка...</span>
+        </div>
+    </div>
+</div>
+
+<div id="lines">
+    <div id="window"></div>
+    <div id="windowModal"></div>
+</div>
+
+<script type="text/javascript">
+    jQuery(function() {
+        load();
+    });
+
+    function load() {
+        $('#loader').css('display', 'display');
+        console.log("aaaa");
+        $('#window').load('@Url.Action("Load", "Purpose")',
+            function () {
+                $('#loader').css('display', 'none');
+            });
+    }
+
+    DetailPurpose = function (id) {
+        $('#windowModal').load('@Url.Action("Details", "Purpose")/' + id);
+    }
+
+    EditPurpose = function (id) {
+        $('#windowModal').load('@Url.Action("Edit", "Purpose")/' + id);
+    }
+
+    CreatePurpose = function () {
+        $('#windowModal').load('@Url.Action("Create", "Purpose")');
+    }
+
+</script>
+

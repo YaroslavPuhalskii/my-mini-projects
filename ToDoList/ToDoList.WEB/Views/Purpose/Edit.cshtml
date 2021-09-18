@@ -1,0 +1,69 @@
+﻿@model ToDoList.WEB.Models.PurposeEditView
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="nameModalOperation" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit iformation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPurposeForm">
+                    @using (Html.BeginForm())
+                    {
+                        <label id="serverError"></label>
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(p => p.PurposeId)
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(p => p.Name)
+                            @Html.TextBoxFor(p => p.Name, new { @class = "form-control", @type = "text", @placeholder = "Enter name" })
+                            @Html.ValidationMessageFor(p => p.Name)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(p => p.Description)
+                            @Html.TextBoxFor(p => p.Description, new { @class = "form-control", @type = "text", @placeholder = "Enter description" })
+                            @Html.ValidationMessageFor(p => p.Description)
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-secondary" onclick="return DetailPurpose(@Model.PurposeId)">Back</a>
+                            <input id="editePurposeBtn" type="submit" class="btn btn-success" value="Update" />
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#myModal').ready(() => {
+        showPurposeEdit();
+    })
+
+    function showPurposeEdit() {
+        $('#myModal').modal('show');
+    }
+
+    function hidePurposeEdit() {
+        $('#myModal').modal('hide');
+    }
+
+    $('form').on('submit', function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Edit", "Purpose")',
+            data: $('form').serialize(),
+            success: function (result) {
+                if (result.result) {
+                    hidePurposeEdit();
+                    DetailPurpose(@Model.PurposeId);
+                }
+                else {
+                    alert("Невозможно обновить данные!");
+                }
+            }
+        })
+    })
+</script>
