@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2104B0F2-B496-450B-9EAB-87099DE2DEF1}</ProjectGuid>
+    <ProjectGuid>{4C246871-4560-4C9C-ACD3-1A7E4DC6C20D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ToDoList.Core</RootNamespace>
@@ -50,8 +50,8 @@
   <ItemGroup>
     <Compile Include="IBaseRepo.cs" />
     <Compile Include="IMissionRepo.cs" />
-    <Compile Include="IPurposeRepo.cs" />
     <Compile Include="IProjectRepo.cs" />
+    <Compile Include="IPurposeRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepo.cs" />
     <Compile Include="Repositories\MissionRepo.cs" />
@@ -60,10 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ToDoList.Entities\ToDoList.Entities.csproj">
-      <Project>{9eec67d4-c255-44fc-9e9c-e9c4e51043b5}</Project>
+      <Project>{8687ed65-57fa-4133-9f17-df4f42804e4b}</Project>
       <Name>ToDoList.Entities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

@@ -1,9 +1,7 @@
-using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using ToDoList.WEB.Infrastructure;
-using ToDoList.WEB.Models;
 
 namespace ToDoList.WEB
 {
@@ -11,8 +9,6 @@ namespace ToDoList.WEB
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<ApplicationDbContext>(new AppDbInitializer());
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

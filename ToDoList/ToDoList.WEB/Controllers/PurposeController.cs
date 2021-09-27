@@ -56,25 +56,20 @@ namespace ToDoList.WEB.Controllers
         [HttpPost]
         public async Task<JsonResult> Create(PurposeCreateView item)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    var config = new MapperConfiguration(cfg => cfg.CreateMap<PurposeCreateView, Purpose>());
-                    var map = new Mapper(config);
-                    var purpose = map.Map<PurposeCreateView, Purpose>(item);
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<PurposeCreateView, Purpose>());
+                var map = new Mapper(config);
+                var purpose = map.Map<PurposeCreateView, Purpose>(item);
 
-                    await purposeRepo.Insert(purpose);
+                await purposeRepo.Insert(purpose);
 
-                    return Json(new { result = true });
-                }
-                catch (Exception ex)
-                {
-                    return Json(new { result = false, message = ex.Message });
-                }
+                return Json(new { result = true });
             }
-
-            return Json(new { result = false, message = "Model is invalid!" });
+            catch (Exception ex)
+            {
+                return Json(new { result = false, message = ex.Message });
+            }
         }
 
         [HttpGet]
@@ -105,11 +100,11 @@ namespace ToDoList.WEB.Controllers
 
                 await purposeRepo.Update(purpose);
 
-                return Json(new { result = true});
+                return Json(new { result = true });
             }
             catch (Exception ex)
             {
-                return Json(new { result = false, message = ex.Message});
+                return Json(new { result = false, message = ex.Message });
             }
         }
 
@@ -128,19 +123,18 @@ namespace ToDoList.WEB.Controllers
             }
         }
 
-        // POST: Purpose/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<JsonResult> Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                await purposeRepo.Remove(id);
 
-                return RedirectToAction("Index");
+                return Json( new { result = true});
             }
             catch
             {
-                return View();
+                return Json( new { result = false});
             }
         }
     }

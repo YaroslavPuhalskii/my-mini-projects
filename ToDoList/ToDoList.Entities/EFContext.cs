@@ -9,7 +9,6 @@ namespace ToDoList.Entities
             : base("name=EFContext")
         {
         }
-
         public DbSet<Purpose> Purposes { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Mission> Missions { get; set; }

@@ -9,7 +9,7 @@ namespace ToDoList.WEB.Infrastructure
 {
     public class NinjectControllerFactory : DefaultControllerFactory
     {
-        private IKernel ninjectKernel;
+        private readonly IKernel ninjectKernel;
         public NinjectControllerFactory()
         {
             ninjectKernel = new StandardKernel();

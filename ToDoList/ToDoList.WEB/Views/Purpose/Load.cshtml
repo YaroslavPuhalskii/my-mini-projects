@@ -1,13 +1,6 @@
 ﻿@model IEnumerable<ToDoList.WEB.Models.PurposeIndexView>
 
-@{
-    bool isValid = (Request.IsAuthenticated && User.IsInRole("Admin"));
-}
-
-@if (isValid)
-{
-    <a href="#" class="btn btn-outline-primary" onclick="return CreatePurpose()">Create</a>
-}
+<a href="#" class="btn btn-outline-primary" onclick="return CreatePurpose()">Create</a>
 
 @if (Model.Count() > 0)
 {
@@ -17,33 +10,27 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                @if (isValid)
-                {
-                    <th>Function</th>
-                }
+                <th>Function</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <th>@item.PurposeId</th>
-                    <td>
-                        @item.Name
-                    </td>
-                    <td>
-                        @item.Description
-                    </td>
-                    @if (isValid)
-                    {
-
-                        <td>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <h6><a href="#" class="btn btn-outline-info" onclick="return DetailPurpose(@item.PurposeId)">Detail</a></h6>
-                            </div>
-                        </td>
-                    }
-                </tr>
+            <tr>
+                <th>@item.PurposeId</th>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <h6><a href="#" class="btn btn-outline-info" onclick="return DetailPurpose(@item.PurposeId)">Detail</a></h6> |
+                        <h6><a href="#" class="btn btn-outline-info" onclick="return DeletePurpose(@item.PurposeId)">Detail</a></h6>
+                    </div>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

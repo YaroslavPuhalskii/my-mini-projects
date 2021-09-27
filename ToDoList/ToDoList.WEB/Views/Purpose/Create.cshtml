@@ -13,7 +13,7 @@
                     @using (Html.BeginForm())
                     {
                         <label id="serverError"></label>
-                        @Html.ValidationSummary()
+                        @Html.ValidationSummary(true)
                         @Html.HiddenFor(p => p.PurposeId)
                         <div class="form-group" id="editeForm">
                             @Html.LabelFor(p => p.Name)
