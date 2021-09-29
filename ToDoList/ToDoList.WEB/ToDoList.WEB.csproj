@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B7066DB7-E1CE-4BDE-BC37-486921D69CB5}</ProjectGuid>
+    <ProjectGuid>{8EC7C447-F95D-408A-9CB7-9B34366A6C29}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -18,7 +18,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
+    <IISExpressSSLPort>44343</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -140,6 +140,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
+    <Compile Include="Models\MissionViewModel.cs" />
+    <Compile Include="Models\ProjectViewModel.cs" />
     <Compile Include="Models\PurposeModelView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -183,15 +185,23 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Purpose\Index.cshtml" />
-    <Content Include="Views\Purpose\Load.cshtml" />
     <Content Include="Views\Purpose\Details.cshtml" />
     <Content Include="Views\Purpose\Create.cshtml" />
     <Content Include="Views\Purpose\Edit.cshtml" />
+    <Content Include="Views\Purpose\Load.cshtml" />
+    <Content Include="Views\Mission\Index.cshtml" />
+    <Content Include="Views\Mission\Load.cshtml" />
+    <Content Include="Views\Mission\Details.cshtml" />
+    <Content Include="Views\Mission\Create.cshtml" />
+    <Content Include="Views\Mission\Edit.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\Load.cshtml" />
+    <Content Include="Views\Project\Details.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Mission\" />
-    <Folder Include="Views\Project\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -208,11 +218,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ToDoList.Core\ToDoList.Core.csproj">
-      <Project>{4c246871-4560-4c9c-acd3-1a7e4dc6c20d}</Project>
+      <Project>{b2610e92-2f6e-4cda-b8ba-8e6bd61991ac}</Project>
       <Name>ToDoList.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\ToDoList.Entities\ToDoList.Entities.csproj">
-      <Project>{8687ed65-57fa-4133-9f17-df4f42804e4b}</Project>
+      <Project>{bb2ab0a1-f94b-4e03-a743-e0704ef02706}</Project>
       <Name>ToDoList.Entities</Name>
     </ProjectReference>
   </ItemGroup>
@@ -232,9 +242,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>61013</DevelopmentServerPort>
+          <DevelopmentServerPort>59682</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44322/</IISUrl>
+          <IISUrl>https://localhost:44343/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

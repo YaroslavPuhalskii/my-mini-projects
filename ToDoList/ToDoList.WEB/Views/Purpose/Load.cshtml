@@ -16,21 +16,21 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <th>@item.PurposeId</th>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @item.Description
-                </td>
-                <td>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <h6><a href="#" class="btn btn-outline-info" onclick="return DetailPurpose(@item.PurposeId)">Detail</a></h6> |
-                        <h6><a href="#" class="btn btn-outline-info" onclick="return DeletePurpose(@item.PurposeId)">Detail</a></h6>
-                    </div>
-                </td>
-            </tr>
+                <tr>
+                    <th>@item.PurposeId</th>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <h6><a href="#" class="btn btn-outline-info" onclick="return DetailPurpose(@item.PurposeId)">Detail</a></h6> |
+                            <h6><a href="#" class="btn btn-outline-info" onclick="return DeletePurpose(@item.PurposeId)">Delete</a></h6>
+                        </div>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

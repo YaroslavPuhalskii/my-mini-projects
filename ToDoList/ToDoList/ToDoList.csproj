@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B5B5A528-414D-4F2E-8791-67332FF8BA2A}</ProjectGuid>
+    <ProjectGuid>{258B9639-E128-4A41-8053-11C268C45985}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>ToDoList</RootNamespace>
     <AssemblyName>ToDoList</AssemblyName>
@@ -34,9 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

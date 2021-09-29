@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4C246871-4560-4C9C-ACD3-1A7E4DC6C20D}</ProjectGuid>
+    <ProjectGuid>{B2610E92-2F6E-4CDA-B8BA-8E6BD61991AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ToDoList.Core</RootNamespace>
@@ -60,11 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ToDoList.Entities\ToDoList.Entities.csproj">
-      <Project>{8687ed65-57fa-4133-9f17-df4f42804e4b}</Project>
+      <Project>{bb2ab0a1-f94b-4e03-a743-e0704ef02706}</Project>
       <Name>ToDoList.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

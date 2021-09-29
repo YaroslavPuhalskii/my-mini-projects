@@ -122,20 +122,5 @@ namespace ToDoList.WEB.Controllers
                 return Json(new { result = false, message = ex.Message });
             }
         }
-
-        [HttpPost]
-        public async Task<JsonResult> Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                await purposeRepo.Remove(id);
-
-                return Json( new { result = true});
-            }
-            catch
-            {
-                return Json( new { result = false});
-            }
-        }
     }
 }
