@@ -1,2 +1,144 @@
 ﻿@model ToDoList.WEB.Models.ProjectEditView
 
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="nameModalOperation" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit iformation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPurposeForm">
+                    @using (Html.BeginForm())
+                    {
+                        <label id="serverError"></label>
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(p => p.ProjectId)
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(p => p.Name)
+                            @Html.TextBoxFor(p => p.Name, new { @class = "form-control", @type = "text", @placeholder = "Enter name" })
+                            @Html.ValidationMessageFor(p => p.Name)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(p => p.Description)
+                            @Html.TextBoxFor(p => p.Description, new { @class = "form-control", @type = "text", @placeholder = "Enter description" })
+                            @Html.ValidationMessageFor(p => p.Description)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(model => model.ProjectStart)
+                            @Html.TextBoxFor(model => model.ProjectStart, new { @class = "form-control", @type = "text", @placeholder = "Enter start date" })
+                            @Html.ValidationMessageFor(model => model.ProjectStart)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(model => model.ProjectFinish)
+                            @Html.TextBoxFor(model => model.ProjectFinish, new { @class = "form-control", @type = "text", @placeholder = "Enter start date" })
+                            @Html.ValidationMessageFor(model => model.ProjectFinish)
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="glyphicon glyphicon-erase btn btn-default" id="btnDelete"> Delete</button>
+                            <input id="editePurposeBtn" type="submit" class="btn btn-success" value="Update" />
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="confirmModal" style="display: none; z-index: 1050;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" id="confirmMessage">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="confirmOk" onclick="return deleteProject(@Model.ProjectId)">Ok</button>
+                <button type="button" class="btn btn-default" id="confirmCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#myModal').ready(() => {
+        showProjectEdit();
+    })
+
+    function showProjectEdit() {
+        $('#myModal').modal('show');
+    }
+
+    function hideProjectEdit() {
+        $('#myModal').modal('hide');
+    }
+
+    $('form').on('submit', function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: '@Url.Action("Edit", "Project")',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function (result) {
+                if (result.result) {
+                    hideProjectEdit();
+                    load();
+                }
+                else {
+                    alert('Невозможно обновить!');
+                }
+            }
+        })
+    })
+
+    var YOUR_MESSAGE_STRING_CONST = "Your confirm message?";
+
+    @*function deleteProject(id) {
+        $('#confirmModal').modal('hide');
+
+         $.ajax({
+            url: '@Url.Action("Delete", "Project")/' + id,
+            type: "POST",
+            success: function (result) {
+                if (result.result) {
+                    load();
+                }
+                else {
+                    alert("Нельзя удалить!");
+                }
+            }
+        })
+    }*@
+
+    $('#btnDelete').on('click', function (e) {
+        confirmDialog(YOUR_MESSAGE_STRING_CONST, function () {
+
+            $.ajax({
+                url: '@Url.Action("Delete", "Project")/' + @Model.ProjectId,
+                type: 'POST',
+                success: function (result) {
+                    if (result.result) {
+                        load();
+                    }
+                    else {
+                        alert('Невозможно удалить!');
+                    }
+                }
+            })
+        });
+    });
+
+    function confirmDialog(message, onConfirm) {
+        hideProjectEdit();
+        var fClose = function () {
+            modal.modal("hide");
+        };
+        var modal = $("#confirmModal");
+        modal.modal("show");
+        $("#confirmMessage").empty().append(message);
+        $("#confirmOk").unbind().one('click', onConfirm).one('click', fClose);
+        $("#confirmCancel").unbind().one("click", function () {
+            showProjectEdit();
+            $('#confirmModal').modal('hide');
+        });
+    }
+</script>

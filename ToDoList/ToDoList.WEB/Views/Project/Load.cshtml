@@ -1,51 +1,21 @@
 ﻿@model IEnumerable<ToDoList.WEB.Models.ProjectIndexView>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectStart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectFinish)
-        </th>
-        <th></th>
-    </tr>
+<a href="#" class="btn btn-outline-primary" onclick="return createProject()">Create new</a>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectStart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectFinish)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+@foreach (var m in Model)
+{
+    <hr />
+    <div class="item">
+        <h3>@m.Name</h3>
+        @m.Description
+        <h5>Work day: @m.ProjectStart - @m.ProjectFinish</h5>
+        <div class="row row-cols-auto">
+            <div class="col">
+                <h6><a href="#" class="btn btn-outline-primary" onclick="return detailsProject(@m.ProjectId)">Details</a></h6>
+            </div>
+            <div class="col">
+                <h6><a href="#" class="btn btn-outline-primary" onclick="return editProject(@m.ProjectId)">Edit</a></h6>
+            </div>
+        </div>
+    </div>
 }
-
-</table>

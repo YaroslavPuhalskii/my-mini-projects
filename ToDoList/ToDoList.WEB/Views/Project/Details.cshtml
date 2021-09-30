@@ -1,2 +1,28 @@
 ﻿@model ToDoList.WEB.Models.ProjectIndexView
 
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="nameModalOperation" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Information about purpose</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3><b>Name</b> : @Model.Name</h3>
+                <h3><b>Descroption</b> : @Model.Description</h3>
+                <h5><b>Date start</b> : @Model.ProjectStart</h5>
+                <h5><b>Date finish</b> : @Model.ProjectFinish</h5>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#myModal').ready(() => {
+        showDetailsForm();
+    });
+    function showDetailsForm() {
+        $('#myModal').modal('show');
+    }
+</script>

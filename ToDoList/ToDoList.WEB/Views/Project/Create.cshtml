@@ -1,2 +1,78 @@
 ﻿@model ToDoList.WEB.Models.ProjectCreateView
 
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="nameModalOperation" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit iformation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPurposeForm">
+                    @using (Html.BeginForm())
+                    {
+                        <label id="serverError"></label>
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(p => p.ProjectId)
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(p => p.Name)
+                            @Html.TextBoxFor(p => p.Name, new { @class = "form-control", @type = "text", @placeholder = "Enter name" })
+                            @Html.ValidationMessageFor(p => p.Name)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(p => p.Description)
+                            @Html.TextBoxFor(p => p.Description, new { @class = "form-control", @type = "text", @placeholder = "Enter description" })
+                            @Html.ValidationMessageFor(p => p.Description)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(model => model.ProjectStart)
+                            @Html.TextBoxFor(model => model.ProjectStart, new { @class = "form-control", @type = "text", @placeholder = "Enter start date" })
+                            @Html.ValidationMessageFor(model => model.ProjectStart)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(model => model.ProjectFinish)
+                            @Html.TextBoxFor(model => model.ProjectFinish, new { @class = "form-control", @type = "text", @placeholder = "Enter start date" })
+                            @Html.ValidationMessageFor(model => model.ProjectFinish)
+                        </div>
+                        <div class="modal-footer">
+                            <input id="editePurposeBtn" type="submit" class="btn btn-success" value="Create" />
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#myModal').ready(() => {
+        showProjectCreate();
+    })
+
+    function showProjectCreate() {
+        $('#myModal').modal('show');
+    }
+
+    function hideProjectCreate() {
+        $('#myModal').modal('hide');
+    }
+
+    $('form').on('submit', function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: '@Url.Action("Create", "Project")',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function (result) {
+                if (result.result) {
+                    hideProjectCreate();
+                    load();
+                }
+                else {
+                    alert('Невозможно создать!');
+                }
+            }
+        })
+    })
+</script>

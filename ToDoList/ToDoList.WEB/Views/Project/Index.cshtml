@@ -1,7 +1,46 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Purpose";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Информация о целях</h2>
+
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status" id="loader">
+            <span class="visually-hidden">Загрузка...</span>
+        </div>
+    </div>
+</div>
+
+<div id="lines">
+    <div id="window"></div>
+    <div id="windowModal"></div>
+</div>
+
+<script type="text/javascript">
+    jQuery(function() {
+        load();
+    });
+
+    function load() {
+        $('#loader').css('display', 'display');
+        $('#window').load('@Url.Action("Load", "Project")',
+            function () {
+                $('#loader').css('display', 'none');
+            });
+    }
+
+    detailsProject = function (id) {
+        $('#windowModal').load('@Url.Action("Details", "Project")/' + id);
+    }
+
+    createProject = function () {
+        $('#windowModal').load('@Url.Action("Create", "Project")');
+    }
+
+    editProject = function (id) {
+        $('#windowModal').load('@Url.Action("Edit", "Project")/' + id);
+    }
+</script>
 
