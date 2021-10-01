@@ -107,7 +107,7 @@ namespace ToDoList.WEB.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<JsonResult> Delete(int id)
         {
             try

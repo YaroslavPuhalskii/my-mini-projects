@@ -1,2 +1,127 @@
 ﻿@model ToDoList.WEB.Models.MissionEditView
 
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="nameModalOperation" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit iformation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPurposeForm">
+                    @using (Html.BeginForm())
+                    {
+                        <label id="serverError"></label>
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(m => m.MissionId)
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(m => m.Name)
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @type = "text", @placeholder = "Enter name" })
+                            @Html.ValidationMessageFor(m => m.Name)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(m => m.Description)
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @type = "text", @placeholder = "Enter description" })
+                            @Html.ValidationMessageFor(m => m.Description)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(m => m.MissionStart)
+                            @Html.TextBoxFor(m => m.MissionStart, new { @class = "form-control", @type = "text", @placeholder = "Enter start date" })
+                            @Html.ValidationMessageFor(m => m.MissionStart)
+                        </div>
+                        <div class="form-group" id="editeForm">
+                            @Html.LabelFor(m => m.MissionFinish)
+                            @Html.TextBoxFor(m => m.MissionFinish, new { @class = "form-control", @type = "text", @placeholder = "Enter finish date" })
+                            @Html.ValidationMessageFor(m => m.MissionFinish)
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="glyphicon glyphicon-erase btn btn-default" id="btnDelete"> Delete</button>
+                            <input id="editePurposeBtn" type="submit" class="btn btn-success" value="Create" />
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="confirmModal" style="display: none; z-index: 1050;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" id="confirmMessage">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="confirmOk">Ok</button>
+                <button type="button" class="btn btn-default" id="confirmCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#myModal').ready(() => {
+        showMissionEdit();
+    })
+
+    function showMissionEdit() {
+        $('#myModal').modal('show');
+    }
+
+    function hideMissionEdit() {
+        $('#myModal').modal('hide');
+    }
+
+    $('form').on('submit', function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: '@Url.Action("Edit", "Mission")',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function (result) {
+                if (result.result) {
+                    hideEditMission();
+                    load();
+                }
+                else {
+                    alert("Невозможно обновить!");
+                }
+            }
+        })
+    })
+
+    var YOUR_MESSAGE_STRING_CONST = "Your confirm message?";
+
+        $('#btnDelete').on('click', function (e) {
+        confirmDialog(YOUR_MESSAGE_STRING_CONST, function () {
+
+            $.ajax({
+                url: '@Url.Action("Delete", "Mission")/' + @Model.MissionId,
+                type: 'POST',
+                success: function (result) {
+                    if (result.result) {
+                        load();
+                    }
+                    else {
+                        alert('Невозможно удалить!');
+                    }
+                }
+            })
+        });
+    });
+
+    function confirmDialog(message, onConfirm) {
+        hideMissionEdit();
+        var fClose = function () {
+            modal.modal("hide");
+        };
+        var modal = $("#confirmModal");
+        modal.modal("show");
+        $("#confirmMessage").empty().append(message);
+        $("#confirmOk").unbind().one('click', onConfirm).one('click', fClose);
+        $("#confirmCancel").unbind().one("click", function () {
+            showMissionEdit();
+            $('#confirmModal').modal('hide');
+        });
+    }
+</script>
