@@ -25,7 +25,7 @@
                             @Html.ValidationMessageFor(p => p.Description)
                         </div>
                         <div class="modal-footer">
-                            <a href="#" class="btn btn-secondary" onclick="return DetailPurpose(@Model.PurposeId)">Back</a>
+                            <a href="#" class="btn btn-secondary" onclick="return DeletePurpose(@Model.PurposeId)">Delete</a>
                             <input id="editePurposeBtn" type="submit" class="btn btn-success" value="Update" />
                         </div>
                     }
@@ -46,6 +46,23 @@
 
     function hidePurposeEdit() {
         $('#myModal').modal('hide');
+    }
+
+    function DeletePurpose(id) {
+
+        $.ajax({
+            url: '@Url.Action("Delete", "Purpose")/' + id,
+            type: "POST",
+            success: function (result) {
+                if (result.result) {
+                    hidePurposeEdit();
+                    load();
+                }
+                else {
+                    alert("Нельзя удалить!");
+                }
+            }
+        })
     }
 
     $('form').on('submit', function (event) {

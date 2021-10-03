@@ -92,23 +92,6 @@
 
     var YOUR_MESSAGE_STRING_CONST = "Your confirm message?";
 
-    @*function deleteProject(id) {
-        $('#confirmModal').modal('hide');
-
-         $.ajax({
-            url: '@Url.Action("Delete", "Project")/' + id,
-            type: "POST",
-            success: function (result) {
-                if (result.result) {
-                    load();
-                }
-                else {
-                    alert("Нельзя удалить!");
-                }
-            }
-        })
-    }*@
-
     $('#btnDelete').on('click', function (e) {
         confirmDialog(YOUR_MESSAGE_STRING_CONST, function () {
 

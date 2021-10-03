@@ -43,21 +43,5 @@
     CreatePurpose = function () {
         $('#windowModal').load('@Url.Action("Create", "Purpose")');
     }
-
-    function DeletePurpose(id) {
-        $.ajax({
-            url: '@Url.Action("Delete", "Purpose")/' + id,
-            type: 'POST',
-            success: function (result) {
-                if (result.result) {
-                    load();
-                }
-                else {
-                    alert("Нельзя удалить цель!");
-                }
-            }
-        })
-    }
-
 </script>
 

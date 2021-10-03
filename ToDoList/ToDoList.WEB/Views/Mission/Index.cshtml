@@ -43,33 +43,4 @@
     createMission =  function () {
         $('#windowModal').load('@Url.Action("Create", "Mission")');
     }
-
-
-    @*DetailPurpose = function (id) {
-        $('#windowModal').load('@Url.Action("Details", "Purpose")/' + id);
-    }
-
-    EditPurpose = function (id) {
-        $('#windowModal').load('@Url.Action("Edit", "Purpose")/' + id);
-    }
-
-    function DeletePurpose(id) {
-
-        $.ajax({
-            url: '@Url.Action("Delete", "Purpose")/' + id,
-            type: "POST",
-            success: function (result) {
-                if (result.result) {
-                    load();
-                }
-                else {
-                    alert("Нельзя удалить!");
-                }
-            }
-        })
-    }
-
-    CreatePurpose = function () {
-        $('#modalWindow').laod('@Url.Action("Create", "Purpose")');
-    }*@
 </script>
